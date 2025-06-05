@@ -1,13 +1,14 @@
 <?php
-$host = "localhost";    // biasanya localhost
-$user = "root";         // username database, default: root
-$pass = "";             // password database (default kosong jika di XAMPP)
-$db   = "db_resep";        // nama database kamu
+$host = "localhost"; //berjalan dilaptop sendiri
+$dbname = "db_resep1"; //nama database
+$username = "root";
+global $conn;
 
-$conn = new mysqli($host, $user, $pass, $db);
-
-// Cek koneksi
-if ($conn->connect_error) {
-    die("Koneksi gagal: " . $conn->connect_error);
+try {
+    $conn = new PDO("mysql:host=$host;dbname=$dbname", $username);
+    $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    // echo "Koneksi Berhasil";
+} catch (PDOException $e) {
+    echo "Koneksi Gagal: " . $e->getMessage();
 }
 ?>
